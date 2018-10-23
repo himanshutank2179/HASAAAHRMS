@@ -12,7 +12,7 @@ use app\models\Attendance;
  */
 class AttendanceSearch extends Attendance
 {
-    public $username,$status2;
+    public $username, $status2;
 
     /**
      * @inheritdoc
@@ -21,7 +21,7 @@ class AttendanceSearch extends Attendance
     {
         return [
             [['attendance_id', 'user_id'], 'integer'],
-            [['login_time', 'logout_time', 'username', 'status', 'note','status2'], 'safe'],
+            [['login_time', 'logout_time', 'username', 'status', 'note', 'status2', 'created_at'], 'safe'],
         ];
     }
 
@@ -43,7 +43,12 @@ class AttendanceSearch extends Attendance
      */
     public function search($params)
     {
-        $query = Attendance::find();
+        // $query = Attendance::find()->select(['companyID','providerID', 'customerID'])->distinct();
+        //$query = Attendance::find()->select('attendance.user_id');
+        //$query= Attendance::find()->select(['attendance.user_id','attendance.note','attendance.login_time','attendance.created_at'])->distinct();
+
+        $query = Attendance::find()
+            ->groupBy(['user_id'])->orderBy(['user_id' => SORT_DESC]);
 
         // add conditions that should always apply here
         $query->joinWith(['user']);
@@ -55,8 +60,8 @@ class AttendanceSearch extends Attendance
         $dataProvider->sort->attributes['username'] = [
             // The tables are the ones our relation are configured to
             // in my case they are prefixed with "tbl_"
-            'asc' => ['user.first_name' => SORT_ASC],
-            'desc' => ['user.first_name' => SORT_DESC],
+            'asc' => ['users.first_name' => SORT_ASC],
+            'desc' => ['users.first_name' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -69,16 +74,20 @@ class AttendanceSearch extends Attendance
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'attendance_id' => $this->attendance_id,
+            /*'attendance_id' => $this->attendance_id,*/
             // 'user_id' => $this->user_id,
-            'login_time' => $this->login_time,
+            //'attendance.login_time' => $this->login_time,
             'logout_time' => $this->logout_time,
+            'Date(attendance.created_at)' => empty($this->created_at) ? date('Y-m-d') : $this->created_at,
             'status' => $this->status,
-            'status' => $this->status2,
+            // 'status' => $this->status2,
         ]);
 
         $query->andFilterWhere(['like', 'users.first_name', $this->username]);
+        $query->andFilterWhere(['like', 'note', $this->note]);
+        $query->andFilterWhere(['like', 'attendance.login_time', $this->login_time]);
 
         return $dataProvider;
     }
+
 }

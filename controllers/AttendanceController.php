@@ -2,13 +2,14 @@
 
 namespace app\controllers;
 
-use app\models\Users;
 use Yii;
+use app\models\Users;
 use app\models\Attendance;
 use app\models\AttendanceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
 
 /**
  * AttendanceController implements the CRUD actions for Attendance model.
@@ -193,5 +194,20 @@ class AttendanceController extends Controller
 //            }
 //        }
 //    }
+     public function actionWorkInfo($user_id,$date)
+    {
+        $old_date_timestamp = strtotime($date);
+        $new_date = date('Y-m-d', $old_date_timestamp);         
+
+        $workinfo = Attendance::find()
+        ->select(['attendance.*','users.user_id','users.first_name','users.last_name'])
+        
+        ->join('LEFT JOIN', 'users', 
+                'attendance.user_id = users.user_id')
+        ->where(['attendance.user_id' => $user_id])
+        ->andWhere(['=','DATE(attendance.created_at)',$new_date])    
+        ->asArray()->all();
+        return json_encode($workinfo);
+    }
 
 }

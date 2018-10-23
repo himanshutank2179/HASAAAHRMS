@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Salary */
 
-$this->title = $model->user_id;
+$this->title = $model->salary_id;
 $this->params['breadcrumbs'][] = ['label' => 'Salaries', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body">
 
             <p>
-                <?= Html::a('Update', ['update', 'id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Delete', ['delete', 'id' => $model->user_id], [
+                <?= Html::a('Update', ['update', 'id' => $model->salary_id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Delete', ['delete', 'id' => $model->salary_id], [
                     'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => 'Are you sure you want to delete this item?',
@@ -29,7 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'user_id',
+                    
+                    [
+                        'attribute'=>'user_id',
+                        'value'=> function($model){
+                                return $model->user->first_name;
+                        }                        
+                    ],
                     'ctc',
                     'tds',
                     'pt',

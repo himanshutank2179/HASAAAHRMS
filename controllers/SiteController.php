@@ -80,15 +80,18 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $is_already_login = Attendance::find()->where(['user_id' => Yii::$app->user->identity->user_id])
-                ->andWhere('DATE(login_time)>=CURDATE()')->all();
+            $is_already_login = Attendance::find()
+                ->where(['user_id' => Yii::$app->user->identity->user_id,'logout_time'=>null])
+                ->andWhere('DATE(login_time)>=CURDATE()')
+                ->all();
 
             if (empty($is_already_login)) {
                 $attendance = new Attendance();
                 $attendance->user_id = Yii::$app->user->identity->user_id;
                 $attendance->login_time = date('Y-m-d H:i:s');
-                $attendance->save();
-            }
+                $attendance->created_at = date('Y-m-d H:i:s');
+                $attendance->save(false);
+           }
 
             return $this->redirect(['/dashboard/index']);
         }
@@ -113,6 +116,7 @@ class SiteController extends Controller
                 return $this->redirect('login');
             }
             $attendance->logout_time = date('Y-m-d H:i:s');
+
             $attendance->save();
             return $this->redirect('login');
         }

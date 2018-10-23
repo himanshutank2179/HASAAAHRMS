@@ -11,6 +11,7 @@ use Yii;
  * @property string $user_id
  * @property string $login_time
  * @property string $logout_time
+ * @property string $created_at
  *
  * @property Users $user
  */
@@ -33,7 +34,7 @@ class Attendance extends \yii\db\ActiveRecord
         return [
            // [['user_id', 'login_time', 'logout_time'], 'required'],
             [['user_id'], 'integer'],
-            [['login_time', 'logout_time','status','note'], 'safe'],
+            [['login_time', 'logout_time','status','note','created_at'], 'safe'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'user_id']],
         ];
     }

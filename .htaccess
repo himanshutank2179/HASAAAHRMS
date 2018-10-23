@@ -4,7 +4,7 @@ Options -Indexes
   RewriteEngine on
 
   RewriteCond %{REQUEST_URI} !^public
-  RewriteRule ^(.*)$ /vytech_v2/web/$1 [L]
+  RewriteRule ^(.*)$ /HASAAAHRMS/web/$1 [L]
 </IfModule>
 
 # Deny accessing below extensions

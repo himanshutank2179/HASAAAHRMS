@@ -49,7 +49,7 @@ class UploadsController extends \yii\web\Controller
             $model->delete();
         }
 
-        echo json_encode(array());
+       /* echo json_encode(array());*/
     }
 
     public function actionCommon($attribute)

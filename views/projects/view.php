@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 use kartik\sortable\Sortable;
 use app\helpers\AppHelper;
+use kartik\file\FileInput;
 
 
 
@@ -114,6 +115,38 @@ $this->params['breadcrumbs'][] = $this->title;
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="col-md-9">
+            <?php
+            $previewImg = array();
+            $initialPreviewConfig = array();
+
+            // if (!$model->isNewRecord) {
+
+            //     $modelImage = app\models\Identity::find()->where(['user_id' => $model->user_id])->all();
+
+            //     if (!empty($modelImage)) {
+
+            //         foreach ($modelImage as $user_image) {
+            //             $prev = Html::img(yii\helpers\BaseUrl::home() . "uploads/" . $user_image->image, ['class' => 'file-preview-image img-responsive', 'alt' => 'img']);
+            //             $a = Html::hiddenInput("Users[images][]", $user_image->image, [
+            //                 'id' => 'users-users_images'
+            //             ]);
+            //             array_push($previewImg, $prev);
+
+            //             $b = ['url' => yii\helpers\BaseUrl::home() . "uploads/filedelete", 'key' => $user_image->identity_id];
+            //             array_push($initialPreviewConfig, $b);
+            //         }
+            //     }
+            // }
+
+            echo '<label class="control-label">Add Attachments</label>';
+            echo FileInput::widget(['model' => $model,
+                                    'attribute' => 'deadline',
+                                    'options' => ['multiple' => true]
+                                    ]);
+?>
+        <div style="color: #dd4b39" id="upload_error" class="help-block"></div>
         </div>
     </div>
 

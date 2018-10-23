@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\helpers\AppHelper;
+use yii\helpers\ArrayHelper;
+use app\models\Users;
+
 
 //\app\assets\SelectAsset::register($this);
 /* @var $this yii\web\View */
@@ -13,9 +16,17 @@ use app\helpers\AppHelper;
 <div class="salary-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    <?php 
+    /*$form->field($model, 'user_id')->dropDownList(AppHelper::getSalaryUsersList(),  ['prompt' => 'Please Select User',
+        'class' => 'form-control select4', 'onchange' => 'getDaysCount($(this).val()); getCtc($(this).val());'
+    ]);*/
+    ?>
+    <?php
+        $category=Users::find()->Where(['is_deleted' =>0])->all();
+        $listData=ArrayHelper::map($category,'user_id','first_name');
+    ?>
     <?=
-    $form->field($model, 'user_id')->dropDownList(AppHelper::getSalaryUsersList(), [
+    $form->field($model, 'user_id')->dropDownList($listData, ['prompt' => 'Please Select User',
         'class' => 'form-control select4', 'onchange' => 'getDaysCount($(this).val()); getCtc($(this).val());'
     ]);
     ?>

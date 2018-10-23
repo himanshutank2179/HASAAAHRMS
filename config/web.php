@@ -12,6 +12,7 @@ $config = [
     'id' => 'alkandarigcc',
     'language' => 'en',
     'basePath' => dirname(__DIR__),
+    'timeZone' => 'Asia/Calcutta',
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -39,7 +40,8 @@ $config = [
             'salary/get-ctc',
             'salary/get-days-count',
             'projects/create-task-comment',
-            'dashboard/filter-chart'
+            'dashboard/filter-chart',
+            'attandance/*'
 
 
             // 'some-controller/some-action',

@@ -35,7 +35,8 @@ AppAsset::register($this);
     <link rel="apple-touch-icon" sizes="144x144" href="<?php echo BaseUrl::home() ?>favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="<?php echo BaseUrl::home() ?>favicon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo BaseUrl::home() ?>favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="<?php echo BaseUrl::home() ?>favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="<?php echo BaseUrl::home() ?>favicon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo BaseUrl::home() ?>favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="<?php echo BaseUrl::home() ?>favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo BaseUrl::home() ?>favicon/favicon-16x16.png">
@@ -44,11 +45,10 @@ AppAsset::register($this);
     <meta name="theme-color" content="#ffffff">
 
 
-
-
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+
 <script type="text/javascript">
     var baseUrl = '<?= Yii::getAlias('@web'); ?>/';
     var jsonData = '';
@@ -61,44 +61,7 @@ AppAsset::register($this);
     <!-- main header -->
     <header class="main-header">
         <!-- top navigation -->
-        <nav class="navbar top-nav">
-            <div class="container">
-                <div class="navbar-header hidden-xs">
-                    <a class="navbar-brand" href="index.html"> <img src="<?=\yii\helpers\BaseUrl::home().'images/logo-3.png'?>" alt=""></a>
-                </div>
-                <!-- Start Atribute Navigation -->
-                <!-- End Atribute Navigation -->
-                <!-- /.navbar-header -->
-                <ul class="nav navbar-top-links navbar-right">
-                    <!-- /.dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="dropdowm-icon ti-announcement"></i>
-                            <span class="label label-warning noti-count" style="display: none;"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-notification" id="noti-list">
-                            <li class="rad-dropmenu-header"><a href="#">Your Notifications</a></li>
-<!--                            <li class="rad-dropmenu-footer"><a href="#">See all notifications</a></li>-->
-                        </ul>  <!-- /.dropdown-alerts -->
-                    </li>
-                    <!-- /.dropdown -->
-<!--                    <li class="dropdown">-->
-<!--                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">-->
-<!--                            <i class="dropdowm-icon ti-settings"></i>-->
-<!--                        </a>-->
-<!--                        <ul class="dropdown-menu dropdown-user">-->
-<!--                            <li><a href="profile.html"><i class="ti-user"></i>&nbsp; Profile</a></li>-->
-<!--                            <li><a href="mailbox.html"><i class="ti-email"></i>&nbsp; My Messages</a></li>-->
-<!--                            <li><a href="lockscreen.html"><i class="ti-lock"></i>&nbsp; Lock Screen</a></li>-->
-<!--                            <li><a href="#"><i class="ti-settings"></i>&nbsp; Settings</a></li>-->
-<!--                            <li><a href="login.html"><i class="ti-layout-sidebar-left"></i>&nbsp; Logout</a></li>-->
-<!--                        </ul>-->
-<!--                        <!-- /.dropdown-user -->
-<!--                    </li>-->
-                    <!-- /.dropdown -->
-                </ul> <!-- /.navbar-top-links -->
-            </div> <!-- /. container -->
-        </nav> <!-- /. top navigation -->
+
         <!--  main navigation -->
         <nav class="navbar navbar-default navbar-mobile navbar-sticky bootsnav">
             <!-- Start Top Search -->
@@ -112,19 +75,33 @@ AppAsset::register($this);
                 </div>
             </div>
             <!-- End Top Search -->
-            <div class="container">
+            <div class="container-fluid">
                 <!-- Start Header Navigation -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand hidden-md hidden-lg" href="#brand"><img src="<?=\yii\helpers\BaseUrl::home().'images/logo-3.png'?>"
-                                                                                   class="logo" alt=""></a>
+                    <a class="navbar-brand hidden-md hidden-lg" href="#brand"><img
+                                src="<?= \yii\helpers\BaseUrl::home() . 'images/logo-3.png' ?>"
+                                class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
                 <!-- Collect the nav links, forms, and other content for toggling -->
 
                 <?php
+
+                $logo = '<a class="navbar-brand" href="' . BaseUrl::home() . '"> <img src="' . \yii\helpers\BaseUrl::home() . 'images/logo-3.png' . '" alt=""></a>';
+
+                $notification = '<li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="dropdowm-icon ti-announcement"></i>
+                            <span class="label label-warning noti-count" style="display: none;"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-notification" id="noti-list">
+                            <li class="rad-dropmenu-header"><a href="#">Your Notifications</a></li>
+<!--                            <li class="rad-dropmenu-footer"><a href="#">See all notifications</a></li>-->
+                        </ul>  <!-- /.dropdown-alerts -->
+                    </li>';
 
 
                 $menuItems = \mdm\admin\components\MenuHelper::getAssignedMenu(Yii::$app->user->id);
@@ -141,10 +118,12 @@ AppAsset::register($this);
                     . '</li>'
                 );
 
-                array_push($menuItems,$arr_item);
+                array_push($menuItems, $arr_item);
+                array_push($menuItems, $notification);
 
-            //  debugPrint($menuItems);
+                array_unshift($menuItems , $logo);
 
+                //  debugPrint($menuItems);
 
 
                 NavBar::begin([
@@ -414,7 +393,7 @@ AppAsset::register($this);
 //                            }
 //                        };
                         //console.log(options);
-                       // $("#easyNotify").easyNotify(options);
+                        // $("#easyNotify").easyNotify(options);
                         setTimeout(function () {
                             toastr.options = {
                                 closeButton: true,
@@ -423,7 +402,7 @@ AppAsset::register($this);
                                 timeOut: 4000
                                 // positionClass: "toast-top-left"
                             };
-                            toastr.success(data[idx]['description'],  data[idx]['title']);
+                            toastr.success(data[idx]['description'], data[idx]['title']);
 
                         }, 1300);
                         //}
@@ -462,7 +441,7 @@ AppAsset::register($this);
                             '</div>\n' +
                             '<div class="rad-notification-body">\n' +
                             '<div class="lg-text">' + data[idx]['title'] + '</div>\n' +
-                            '<div class="sm-text">'+ data[idx]['description'] +'</div>\n' +
+                            '<div class="sm-text">' + data[idx]['description'] + '</div>\n' +
                             '</div>\n' +
                             '</a>\n' +
                             '</li>';
@@ -527,4 +506,5 @@ AppAsset::register($this);
     //            },
     //        });
     //    }
+
 </script>

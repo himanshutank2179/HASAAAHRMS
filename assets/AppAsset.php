@@ -60,6 +60,7 @@ class AppAsset extends AssetBundle
         'select2/select2.full.min.js',
         'plugins/modals/classie.js',
         'plugins/modals/modalEffects.js',
+        'js/moment.js',
         'plugins/Nestable/jquery.nestable.js'
     ];
     public $depends = [

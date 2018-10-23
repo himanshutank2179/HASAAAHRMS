@@ -4,6 +4,8 @@ namespace app\helpers;
 
 use app\models\Permissions;
 use app\models\Projects;
+use app\models\ProjectType;
+use app\models\Services;
 use yii;
 use yii\helpers\ArrayHelper;
 use app\models\Users;
@@ -88,6 +90,22 @@ class AppHelper
             ->andWhere('salary.user_id IS NULL')
             ->all();
         $list = ArrayHelper::map($model, 'user_id', 'first_name');
+        return $list;
+    }
+
+    static public function getProjectTypes()
+    {
+
+        $model = ProjectType::find()->all();
+        $list = ArrayHelper::map($model, 'project_type_id', 'name');
+        return $list;
+    }
+
+    static public function getServices()
+    {
+
+        $model = Services::find()->all();
+        $list = ArrayHelper::map($model, 'service_id', 'name');
         return $list;
     }
 
