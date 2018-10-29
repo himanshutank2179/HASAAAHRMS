@@ -148,8 +148,10 @@ class AttendanceController extends Controller
     {
 
         $users = Users::find()->where(['is_deleted' => 0])->all();
-        $is_off_made = Attendance::find()->where('DATE(login_time)>=CURDATE()')->andWhere('=', ['status', 'O']);
-        if (!$is_off_made) {
+        $is_off_made = Attendance::find()
+            ->where('DATE(login_time)>=CURDATE()')
+            ->andWhere(['=', 'status', 'O'])->all();
+        if (empty($is_off_made)) {
             foreach ($users as $user):
                 $attendance = new Attendance();
                 $attendance->user_id = $user->user_id;
@@ -209,5 +211,4 @@ class AttendanceController extends Controller
         ->asArray()->all();
         return json_encode($workinfo);
     }
-
 }
