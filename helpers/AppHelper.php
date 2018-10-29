@@ -9,6 +9,9 @@ use app\models\Services;
 use yii;
 use yii\helpers\ArrayHelper;
 use app\models\Users;
+use app\models\Countries;
+use app\models\States;
+use app\models\Cities;
 
 
 class AppHelper
@@ -152,5 +155,26 @@ class AppHelper
         $Rupees = implode('', array_reverse($str));
         $paise = ($decimal) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
         return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
+    }
+
+    static public function getStates()
+    {
+        $data = States::find()->all();
+        $list = ArrayHelper::map($data, 'id', 'name');
+        return $list;
+    }
+
+    static public function getCountries()
+    {
+        $data = Countries::find()->all();
+        $list = ArrayHelper::map($data, 'id', 'name');
+        return $list;
+    }
+
+    static public function getCity()
+    {
+        $data = Cities::find()->all();
+        $list = ArrayHelper::map($data, 'id', 'name');
+        return $list;
     }
 }

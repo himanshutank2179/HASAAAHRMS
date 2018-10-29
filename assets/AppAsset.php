@@ -61,6 +61,7 @@ class AppAsset extends AssetBundle
         'plugins/modals/classie.js',
         'plugins/modals/modalEffects.js',
         'js/moment.js',
+        'js/ajaxform.js',
         'plugins/Nestable/jquery.nestable.js'
     ];
     public $depends = [
