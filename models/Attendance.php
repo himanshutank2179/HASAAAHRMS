@@ -17,6 +17,7 @@ use Yii;
  */
 class Attendance extends \yii\db\ActiveRecord
 {
+    public $id;
 
     /**
      * @inheritdoc
