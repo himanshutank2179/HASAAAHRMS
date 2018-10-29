@@ -8,7 +8,7 @@ use yii\helpers\Html;
 <div class="col-md-6">
 <div class="animated bounceInRight create-po document-form" id="<?= $i ?>">
     
-    <div class="row">
+    <!-- <div class="row"> -->
 
         <div class="col-md-10">
             <label for="clients-mobile-<?= $i ?>"> Mobile </label>
@@ -28,6 +28,6 @@ use yii\helpers\Html;
             <br>
             <button class="btn btn-danger" onclick="ajaxform.removeBlankFloatForm('<?php echo $i ?>')">Remove</button>
         </div>
-    </div>
+    <!-- </div> -->
 </div>
 </div>

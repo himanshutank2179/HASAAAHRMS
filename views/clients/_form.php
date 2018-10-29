@@ -66,7 +66,8 @@ use app\models\ClientMobile;
                         <?php $all_mobiles = ClientMobile::find()->where(['client_id' => $model->client_id])->all(); 
                             foreach ($all_mobiles as $key => $value) : ?>
                         <div class="animated bounceInRight create-po document-form" id="<?= $key ?>">
-                            <div class="row">
+                            <!-- <div class="row"> -->
+                                <div class="col-md-6">
                                 <div class="col-md-10">
                                         <label for="clients-mobile-<?= $key ?>"> Mobile </label>
                                             <?= Html::activeTextInput($value, 'client_mobile[]', [
@@ -81,7 +82,8 @@ use app\models\ClientMobile;
                                 <div class="col-md-2"><br>
                                     <button class="btn btn-danger" onclick="ajaxform.removeBlankFloatForm('<?php echo $key ?>')">Remove</button>
                                 </div>
-                            </div>
+                                </div>
+                            <!-- </div> -->
                     </div>
                     <?php  endforeach; ?>
                     <?php endif;  ?>

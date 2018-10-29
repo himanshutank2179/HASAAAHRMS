@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Print', ['print', 'id' => $model->client_id], ['class' => 'btn btn-primary', 'target' => '_blank',]); ?>
+        <?php // Html::a('Print', ['print', 'id' => $model->client_id], ['class' => 'btn btn-primary', 'target' => '_blank',]); ?>
     </p>
 
     <?= DetailView::widget([
