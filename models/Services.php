@@ -33,7 +33,7 @@ class Services extends \yii\db\ActiveRecord
             [['project_type_id', 'name'], 'required'],
             [['project_type_id'], 'integer'],
             [['price'], 'safe'],
-            [['name'], 'string', 'max' => 255],
+            [['name','duration',], 'string', 'max' => 255],
             [['project_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProjectType::className(), 'targetAttribute' => ['project_type_id' => 'project_type_id']],
         ];
     }
@@ -47,6 +47,7 @@ class Services extends \yii\db\ActiveRecord
             'service_id' => 'Service',
             'project_type_id' => 'Project Type',
             'name' => 'Name',
+            'duration' => 'Duration'
         ];
     }
 

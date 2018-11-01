@@ -12,6 +12,7 @@ use app\models\Users;
 use app\models\Countries;
 use app\models\States;
 use app\models\Cities;
+use app\models\Clients;
 
 
 class AppHelper
@@ -175,6 +176,13 @@ class AppHelper
     {
         $data = Cities::find()->all();
         $list = ArrayHelper::map($data, 'id', 'name');
+        return $list;
+    }
+
+    static public function getClients()
+    {
+        $data = Clients::find()->where(['is_deleted' => 0])->all();
+        $list = ArrayHelper::map($data, 'client_id', 'name');
         return $list;
     }
 }

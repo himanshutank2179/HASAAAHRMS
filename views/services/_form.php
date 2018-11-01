@@ -17,6 +17,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'duration')->textInput(['maxlength' => true]) ?>
+    
+
     <?= $form->field($model, 'price')->textInput(['maxlength' => true, 'type' => 'number']) ?>
 
     <div class="form-group">
